@@ -45,9 +45,13 @@ html, body {
 }
 
 /* --- SCROLL ENGELLEME --- */
+/* --- SCROLL ENGELLEME (GÜNCELLENDİ) --- */
 body.no-scroll {
     overflow: hidden;
+    height: 100vh; /* Ekran boyuna sabitle */
+    touch-action: none; /* Dokunma hareketlerini iptal et */
 }
+
 
 /* --- HAREKETLİ GLOW EFEKTLERİ --- */
 .glow-container {
@@ -388,7 +392,7 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(0, 0, 0, 1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 99999;
@@ -900,13 +904,16 @@ modal.addEventListener('touchstart', (e) => {
 }, { passive: false });
 
 modal.addEventListener('touchmove', (e) => {
+    e.preventDefault(); // KİLİT NOKTA: Ne yaparsan yap sayfayı kaydırma!
+    
     if (!isPinching) return;
-    e.preventDefault();
+    
     const newDistance = getDistance(e.touches);
     const scaleFactor = newDistance / initialDistance;
     currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
     modalContent.style.transform = `scale(${currentScale})`;
 }, { passive: false });
+
 
 modal.addEventListener('touchend', (e) => {
     if (!isPinching) return;
@@ -1121,4 +1128,4 @@ window.addEventListener('popstate', (e) => {
 
 
 
-</script>
+    </script>
