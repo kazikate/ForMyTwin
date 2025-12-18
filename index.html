@@ -480,29 +480,39 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
 }
 
 /* Fade out için */
+/* Fade out için */
 .fade-out {
   opacity: 0 !important;
-  transition: opacity 1s ease !important;
+  visibility: hidden !important; /* Görünmez olunca dokunulmaz olsun */
+  transition: opacity 1s ease, visibility 1s ease !important;
 }
+
 
   /* --- VİDEO KONTEYNERİ --- */
 #video-container {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.9); /* Arkaplan hafif kararır */
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center; justify-content: center;
-  z-index: 100005; /* Her şeyin üstünde */
+  z-index: 100005;
+  
+  /* DEĞİŞEN KISIMLAR: */
   opacity: 0;
+  visibility: hidden; /* Artık kapalıyken tarayıcı bunu görmeyecek */
   pointer-events: none;
-  transition: opacity 0.5s ease; /* Tak diye gelmesi için süreyi kısabilirsin */
+  
+  /* Hem opacity hem visibility animasyonlu değişecek */
+  transition: opacity 0.5s ease, visibility 0.5s ease; 
 }
 
 #video-container.active {
   opacity: 1;
+  visibility: visible; /* Açılınca görünür olacak */
   pointer-events: auto;
 }
+
 
 #surprise-video {
   width: auto;  /* Genişliği zorlama, videonun kendi genişliği olsun */
@@ -670,10 +680,11 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
   <div id="peki-text">Peki...</div>
 
       <div id="video-container">
-    <video id="surprise-video" controls>
-      <source src="https://raw.githubusercontent.com/kazikate/Music/734c1d50b224edeb47fbe15527102a545d14c335/VID_20251218_012048_729.mp4" type="video/mp4">
-      Tarayıcın videoyu desteklemiyor.
-    </video>
+  <video id="surprise-video" controls playsinline 
+         data-link="https://raw.githubusercontent.com/kazikate/Music/734c1d50b224edeb47fbe15527102a545d14c335/VID_20251218_012048_729.mp4">
+  </video>
+</div>
+
   </div>
 
 </body>
@@ -915,7 +926,7 @@ function getDistance(touches) {
 }
 
 // ------------------------------------------------------------------
-// 3. EASTER EGG (SÜRPRİZ YUMURTA) & VİDEO
+// 3. EASTER EGG (SÜRPRİZ YUMURTA) & VİDEO (SRC SÖK-TAK VERSİYONU)
 // ------------------------------------------------------------------
 
 const infiniteCard = document.getElementById('infinite-card');
@@ -948,10 +959,13 @@ function closeAllEasterEgg() {
   statsCard.classList.remove('blur-active');
   blackout.classList.remove('active');
   
+  // VİDEOYU SIFIRLAMA (KİLİT NOKTA BURASI)
   if(videoContainer) videoContainer.classList.remove('active');
   if(videoPlayer) {
       videoPlayer.pause();
       videoPlayer.currentTime = 0;
+      videoPlayer.src = ""; // Linki söküyoruz! Samsung artık videoyu göremez.
+      videoPlayer.load();   // Tarayıcıya "boş olduğunu" zorla kabul ettir.
   }
   
   clearClasses(eminText);
@@ -1015,7 +1029,7 @@ infiniteCard.addEventListener('click', (e) => {
   }
 });
 
-// Overlay Tıklama (Sadece Easter Egg için)
+// Overlay Tıklama
 focusOverlay.addEventListener('click', () => {
   if (!blackout.classList.contains('active')) {
     closeAllEasterEgg();
@@ -1036,9 +1050,14 @@ if(evetBtn) {
       setTimeout(() => {
         pekiText.classList.add('fade-out');
         
-        // Video Başlat
+        // VİDEOYU BAŞLATMA (KİLİT NOKTA)
         videoContainer.classList.add('active');
-        bgMusic.pause();
+        if (musicStarted) bgMusic.pause(); // Eğer müzik açıksa durdur
+        
+        // 1. Linki data-link'ten alıp src'ye koyuyoruz
+        videoPlayer.src = videoPlayer.getAttribute('data-link');
+        
+        // 2. Videoyu oynat
         videoPlayer.play().catch(e => console.log("Otomatik oynatma engellendi:", e));
         
       }, 3000); 
@@ -1057,14 +1076,10 @@ if(hayirBtn) {
 }
 
 // Video Bitince
-// --- DEĞİŞECEK KISIM (En alttaki video bitiş kodu) ---
-
-// Video Bitince
 if(videoPlayer) {
     videoPlayer.addEventListener('ended', () => {
       closeAllEasterEgg();
-      
-      // YENİ: Sadece eğer kullanıcı daha önce müziği açtıysa devam ettir
+      // Eğer kullanıcı başta müziği açmışsa tekrar başlat
       if (musicStarted) {
           bgMusic.volume = 0.5; 
           bgMusic.play();
@@ -1072,12 +1087,10 @@ if(videoPlayer) {
     });
 }
 
-
-// Geri Tuşu Yönetimi (Ortak)
+// Geri Tuşu
 window.addEventListener('popstate', (e) => {
   const state = e.state || {};
   
-  // 1. Galeri Modu Açıksa
   if (modal.classList.contains('active') && state.modal !== MODAL_STATE_NAME) {
       modal.classList.remove('active');
       document.body.classList.remove('no-scroll');
@@ -1086,27 +1099,24 @@ window.addEventListener('popstate', (e) => {
       return;
   }
 
-  // 2. Easter Egg Açıksa
   const easterStage = state.easterStage || 'normal';
   if (easterStage === 'normal') {
-     // Eğer blackout veya spotlight aktifse kapat
      if (blackout.classList.contains('active') || infiniteCard.classList.contains('focused')) {
          closeAllEasterEgg();
      }
   } else if (easterStage === 'spotlight') {
-     // Blackout'tan spotlight'a dönüş
      blackout.classList.remove('active');
      clearClasses(eminText);
      clearClasses(buttonsContainer);
+     // Video açıksa kapat ve linki sök
      if(videoContainer) videoContainer.classList.remove('active');
-     if(videoPlayer) videoPlayer.pause();
+     if(videoPlayer) {
+         videoPlayer.pause();
+         videoPlayer.src = "";
+     }
   }
 });
 
-// Sayfa Yüklenince History Reset
-window.addEventListener('load', () => {
-  history.replaceState({ easterStage: 'normal', modal: null }, '');
-});
 
 
 
