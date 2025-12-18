@@ -44,13 +44,13 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* --- SCROLL ENGELLEME --- */
-/* --- SCROLL ENGELLEME (GÜNCELLENDİ) --- */
+/* --- SCROLL ENGELLEME (DÜZELTİLDİ: ZIPLAMA YAPMAZ) --- */
 body.no-scroll {
-    overflow: hidden;
-    height: 100vh; /* Ekran boyuna sabitle */
-    touch-action: none; /* Dokunma hareketlerini iptal et */
+    overflow: hidden; 
+    /* height: 100vh;  <-- BU SATIR SİLİNDİ, SORUN BUYDU */
+    /* position: fixed; <-- BU DA SİLİNDİ, JS İLE YÖNETECEĞİZ */
 }
+
 
 
 /* --- HAREKETLİ GLOW EFEKTLERİ --- */
@@ -697,10 +697,38 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
 const $ = sel => document.querySelector(sel);
 
 // ------------------------------------------------------------------
-// 1. TEMEL EFEKTLER (Yazı, Müzik, Konfeti, Scroll)
+// GLOBAL SCROLL YÖNETİCİSİ (ZIPLAMAYI ENGELLEYEN SİSTEM)
+// ------------------------------------------------------------------
+let savedScrollPosition = 0;
+
+function lockPage() {
+    // 1. O anki kaydırma pozisyonunu kaydet
+    savedScrollPosition = window.scrollY;
+    
+    // 2. Sayfayı olduğu konuma 'ÇİVİLE' (Fixed yapıp yukarı öteliyoruz)
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollPosition}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+}
+
+function unlockPage() {
+    // 1. Çivileri sök
+    document.body.style.removeProperty('position');
+    document.body.style.removeProperty('top');
+    document.body.style.removeProperty('width');
+    document.body.style.removeProperty('overflow');
+    
+    // 2. Kullanıcıyı tam kaldığı yere geri ışınla
+    window.scrollTo(0, savedScrollPosition);
+}
+
+
+// ------------------------------------------------------------------
+// 1. TEMEL EFEKTLER
 // ------------------------------------------------------------------
 
-// Typewriter (Yazı Efekti)
+// Typewriter
 const lines = [
   "Canım ikizimm,",
   "Bugün senin günün ve bugün seni mutlu edebilmek için bu sayfayı senin için hazırladım.",
@@ -741,6 +769,7 @@ function type() {
 // Müzik Kontrolü
 const player = $('#player');
 player.src = "https://raw.githubusercontent.com/kazikate/Music/cedeabbb87c1a32f7c95bf4752997fab6d67d7b6/One%2BMore%2BLight%2B(Instrumental)%2B-%2BLinkin%2BPark.wav";
+let musicStarted = false;
 
 function fadeInMusic(targetVolume, duration = 0) {
   player.play(); player.volume = 0;
@@ -752,12 +781,8 @@ function fadeInMusic(targetVolume, duration = 0) {
   }, interval);
 }
 
-// --- DEĞİŞECEK KISIM (Müzik kontrolünün olduğu yer) ---
-
-let musicStarted = false; // YENİ: Başlangıçta müzik kapalı
-
 $('#revealMsg').addEventListener('click', () => {
-  musicStarted = true; // YENİ: Butona basılınca "Müzik açıldı" diye not alıyoruz
+  musicStarted = true;
   el.innerHTML = ''; i = 0; j = 0;
   el.appendChild(caret); type();
   $('#musicIcon').style.display = 'inline-block';
@@ -765,7 +790,6 @@ $('#revealMsg').addEventListener('click', () => {
   btn.classList.remove('press'); void btn.offsetWidth; btn.classList.add('press');
   fadeInMusic(1);
 });
-
 
 // PNG Konfeti
 const canvas = document.getElementById('confetti');
@@ -800,7 +824,7 @@ function draw() {
 }
 spawn(100); draw();
 
-// Scroll & Reveal Efektleri
+// Scroll Reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal'); } else { entry.target.classList.remove('reveal'); } });
 }, { threshold: 0.1 });
@@ -845,7 +869,9 @@ function openModal(polaroidNode) {
     if (!history.state || history.state.modal !== MODAL_STATE_NAME) {
         history.pushState({ modal: MODAL_STATE_NAME }, '', window.location.href);
     }
-    document.body.classList.add('no-scroll');
+    
+    lockPage(); // SAYFAYI KİLİTLE (Zıplamadan)
+    
     modalContent.innerHTML = '';
     const cloned = polaroidNode.cloneNode(true);
     modalContent.appendChild(cloned);
@@ -862,7 +888,9 @@ function closeModal() {
     if (!modal.classList.contains('active')) return;
     modal.classList.remove('active');
     document.removeEventListener('keydown', handleEscape);
-    document.body.classList.remove('no-scroll');
+    
+    unlockPage(); // SAYFA KİLİDİNİ AÇ (Eski yerine dön)
+    
     modalContent.style.transition = SPRING_TRANSITION;
     modalContent.style.transform = 'scale(0)';
     currentScale = 1;
@@ -891,7 +919,7 @@ function handleEscape(e) {
     if (e.key === 'Escape') closeModal();
 }
 
-// Pinch Zoom (Mobilde Çimdikleme)
+// Pinch Zoom
 modal.addEventListener('touchstart', (e) => {
     if (e.touches.length === MIN_TOUCHES_FOR_PINCH) {
         e.preventDefault(); 
@@ -904,8 +932,7 @@ modal.addEventListener('touchstart', (e) => {
 }, { passive: false });
 
 modal.addEventListener('touchmove', (e) => {
-    e.preventDefault(); // KİLİT NOKTA: Ne yaparsan yap sayfayı kaydırma!
-    
+    e.preventDefault(); // ARKAPLAN KAYMASINI ENGELLE
     if (!isPinching) return;
     
     const newDistance = getDistance(e.touches);
@@ -913,7 +940,6 @@ modal.addEventListener('touchmove', (e) => {
     currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
     modalContent.style.transform = `scale(${currentScale})`;
 }, { passive: false });
-
 
 modal.addEventListener('touchend', (e) => {
     if (!isPinching) return;
@@ -933,7 +959,7 @@ function getDistance(touches) {
 }
 
 // ------------------------------------------------------------------
-// 3. EASTER EGG (SÜRPRİZ YUMURTA) & VİDEO (SRC SÖK-TAK VERSİYONU)
+// 3. EASTER EGG (SÜRPRİZ YUMURTA)
 // ------------------------------------------------------------------
 
 const infiniteCard = document.getElementById('infinite-card');
@@ -959,20 +985,20 @@ function clearClasses(element) {
   if(element) element.classList.remove('visible', 'fade-out', 'active');
 }
 
-// Tamamen kapat ve sayfayı İLK haline döndür
 function closeAllEasterEgg() {
   infiniteCard.classList.remove('focused');
   focusOverlay.classList.remove('active');
   statsCard.classList.remove('blur-active');
   blackout.classList.remove('active');
   
-  // VİDEOYU SIFIRLAMA (KİLİT NOKTA BURASI)
+  unlockPage(); // SAYFA KİLİDİNİ AÇ
+  
   if(videoContainer) videoContainer.classList.remove('active');
   if(videoPlayer) {
       videoPlayer.pause();
       videoPlayer.currentTime = 0;
-      videoPlayer.src = ""; // Linki söküyoruz! Samsung artık videoyu göremez.
-      videoPlayer.load();   // Tarayıcıya "boş olduğunu" zorla kabul ettir.
+      videoPlayer.src = ""; 
+      videoPlayer.load();   
   }
   
   clearClasses(eminText);
@@ -988,11 +1014,12 @@ function closeAllEasterEgg() {
   }
 }
 
-// Spotlight Aç
 function openSpotlight() {
   infiniteCard.classList.add('focused');
   focusOverlay.classList.add('active');
   statsCard.classList.add('blur-active');
+  
+  lockPage(); // SAYFAYI KİLİTLE
   
   if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
   clickCount = 1;
@@ -1003,7 +1030,16 @@ function openSpotlight() {
   history.pushState({ easterStage: 'spotlight' }, '');
 }
 
-// Karanlık Modu Aç
+// Overlay üzerinde kaydırmayı engelle
+[focusOverlay, blackout, videoContainer].forEach(el => {
+    if(el) {
+        el.addEventListener('touchmove', (e) => {
+            e.preventDefault(); 
+        }, { passive: false });
+    }
+});
+
+// Karanlık Mod
 function openBlackout() {
   blackout.classList.add('active');
   if (navigator.vibrate) navigator.vibrate([100, 100, 100, 100, 200]);
@@ -1057,14 +1093,11 @@ if(evetBtn) {
       setTimeout(() => {
         pekiText.classList.add('fade-out');
         
-        // VİDEOYU BAŞLATMA (KİLİT NOKTA)
         videoContainer.classList.add('active');
-        if (musicStarted) bgMusic.pause(); // Eğer müzik açıksa durdur
+        if (musicStarted) bgMusic.pause(); 
         
-        // 1. Linki data-link'ten alıp src'ye koyuyoruz
         videoPlayer.src = videoPlayer.getAttribute('data-link');
         
-        // 2. Videoyu oynat
         videoPlayer.play().catch(e => console.log("Otomatik oynatma engellendi:", e));
         
       }, 3000); 
@@ -1086,7 +1119,6 @@ if(hayirBtn) {
 if(videoPlayer) {
     videoPlayer.addEventListener('ended', () => {
       closeAllEasterEgg();
-      // Eğer kullanıcı başta müziği açmışsa tekrar başlat
       if (musicStarted) {
           bgMusic.volume = 0.5; 
           bgMusic.play();
@@ -1100,7 +1132,8 @@ window.addEventListener('popstate', (e) => {
   
   if (modal.classList.contains('active') && state.modal !== MODAL_STATE_NAME) {
       modal.classList.remove('active');
-      document.body.classList.remove('no-scroll');
+      document.removeEventListener('keydown', handleEscape);
+      unlockPage(); // Kilidi aç
       modalContent.style.transition = SPRING_TRANSITION;
       modalContent.style.transform = 'scale(0)';
       return;
@@ -1115,7 +1148,6 @@ window.addEventListener('popstate', (e) => {
      blackout.classList.remove('active');
      clearClasses(eminText);
      clearClasses(buttonsContainer);
-     // Video açıksa kapat ve linki sök
      if(videoContainer) videoContainer.classList.remove('active');
      if(videoPlayer) {
          videoPlayer.pause();
@@ -1124,8 +1156,10 @@ window.addEventListener('popstate', (e) => {
   }
 });
 
+// Load
+window.addEventListener('load', () => {
+  history.replaceState({ easterStage: 'normal', modal: null }, '');
+});
 
 
-
-
-    </script>
+</script>
