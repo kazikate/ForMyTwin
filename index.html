@@ -1,28 +1,25 @@
 <!doctype html>
 <html lang="tr">
 <head>
-    <link rel="icon" type="image/png" href="https://iili.io/fcgPrIn.md.jpg">
+    <link rel="icon" type="image/png" href="https://iili.io/fcgxpoX.md.jpg">
     
     <meta property="og:title" content="For My Twin">
     <meta property="og:description" content="">
-    
-    <meta property="og:image" content="https://iili.io/fcgPrIn.md.jpg"> 
-    
-    <meta property="og:url" content="https://kazikate.github.io/ForMyTwin/"> 
+    <meta property="og:image" content="https://iili.io/fcgxpoX.md.jpg"> 
+    <meta property="og:url" content="https://kazikate.github.io/Biography/"> 
     <meta property="og:type" content="website">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@kazikate1"> <meta name="twitter:title" content="For My Twin">
     <meta name="twitter:description" content="">
-    
-    <meta name="twitter:image" content="https://iili.io/fcgPrIn.md.jpg"> 
+    <meta name="twitter:image" content="https://iili.io/fcgxpoX.md.jpg"> 
 
-  <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>İyi ki Doğdun, İkizimmm 🎂</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>İyi ki Doğdun, İkizimmm 🎂</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg: #0b0b10;
@@ -44,6 +41,12 @@ html, body {
   color: var(--text);
   background-color: var(--bg);
   line-height:1.6;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- SCROLL ENGELLEME --- */
+body.no-scroll {
+    overflow: hidden;
 }
 
 /* --- HAREKETLİ GLOW EFEKTLERİ --- */
@@ -66,34 +69,9 @@ html, body {
   animation: blob-move 5s infinite alternate ease-in-out;
 }
 
-.blob:nth-child(1) {
-  background: var(--primary);
-  width: 500px;
-  height: 500px;
-  top: -150px;
-  left: -150px;
-}
-
-.blob:nth-child(2) {
-  background: var(--primary-2);
-  width: 600px;
-  height: 600px;
-  bottom: -150px;
-  right: -150px;
-  animation-duration: 25s;
-  animation-delay: -5s;
-}
-
-.blob:nth-child(3) {
-  background: var(--accent);
-  width: 350px;
-  height: 350px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: wander 20s infinite ease-in-out;
-  opacity: 0.4;
-}
+.blob:nth-child(1) { background: var(--primary); width: 500px; height: 500px; top: -150px; left: -150px; }
+.blob:nth-child(2) { background: var(--primary-2); width: 600px; height: 600px; bottom: -150px; right: -150px; animation-duration: 25s; animation-delay: -5s; }
+.blob:nth-child(3) { background: var(--accent); width: 350px; height: 350px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: wander 20s infinite ease-in-out; opacity: 0.4; }
 
 @keyframes blob-move {
   0% { transform: translate(0, 0) scale(1); }
@@ -107,7 +85,6 @@ html, body {
   66% { transform: translate(-80%, -20%) rotate(240deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
-/* ------------------------------------------- */
 
 .wrap {
   position: relative;
@@ -135,29 +112,13 @@ html, body {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.card.reveal{
-  opacity:1;
-  transform: translateY(0) translateZ(0);
-}
+.card.reveal{ opacity:1; transform: translateY(0) translateZ(0); }
 
 header.card {
-  box-shadow: var(--glow),
-              0 12px 24px rgba(0, 0, 0, 0.5),
-              0 20px 60px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--glow), 0 12px 24px rgba(0, 0, 0, 0.5), 0 20px 60px rgba(0, 0, 0, 0.35);
 }
-
-header.card::before,
-header.card::after {
-content:"";
-position:absolute;
-width:150px;
-height:150px;
-border-radius:50%;
-filter: blur(25px);
-top:50%;
-left:50%;
-transform-origin: center;
-will-change: transform, filter;
+header.card::before, header.card::after {
+content:""; position:absolute; width:150px; height:150px; border-radius:50%; filter: blur(25px); top:50%; left:50%; transform-origin: center; will-change: transform, filter;
 }
 header.card::before { background: rgba(155,92,255,0.3); animation: orbit-mor 1s linear forwards;}
 header.card::after { background: rgba(53,209,255,0.3); animation: orbit-mavi 1s linear forwards;}
@@ -177,17 +138,12 @@ header.card > * { position: relative; z-index:1; }
 .btn.press { animation: press 0.2s ease; }
 
 section.card{ margin-top:20px; }
-
 .fancy{ font-family:'Pacifico', cursive; background: linear-gradient(90deg, var(--accent), var(--primary)); -webkit-background-clip:text; color:transparent; font-size:28px; font-weight:400; margin-left:4px; }
 .type{min-height:48px; font-size:clamp(16px,2.6vw,20px);}
 #typewriter{ display: block; text-align: left; }
 .caret{ display:inline-block; width:10px; background:currentColor; animation:blink 1s steps(1) infinite; vertical-align: middle; }
-.grid{
-display:grid;
-grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-gap: 20px;
-justify-items: center;
-}
+.grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; justify-items: center; }
+
 .polaroid {
   position: relative;
   z-index: 2;
@@ -204,13 +160,11 @@ justify-items: center;
   will-change: transform, opacity;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
 }
-.polaroid.reveal {
-  opacity: 1;
-  transform: translateY(0) rotate(var(--rot, -2deg));
-}
+.polaroid.reveal { opacity: 1; transform: translateY(0) rotate(var(--rot, -2deg)); }
 .polaroid:hover{ transform:rotate(0) translateY(-2px) translateZ(0); }
-.polaroid img{ width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:10px; }
+.polaroid img{ width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:10px; pointer-events: none;}
 .polaroid .cap{ margin-top:6px; text-align:center; font-weight:600; font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
 .polaroid:nth-child(1).reveal { transition-delay: 0s; }
@@ -221,327 +175,117 @@ justify-items: center;
 .timeline{position:relative; padding-left:22px}
 .timeline:before{ content:""; position:absolute; left:10px; top:4px; bottom:4px; width:2px; background:linear-gradient(var(--primary), transparent); transform: translateZ(0);}
 .t-item {
-  position: relative;
-  z-index: 2;
-  margin: 16px 0;
-  padding: 12px 12px 12px 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  will-change: transform, opacity;
+  position: relative; z-index: 2; margin: 16px 0; padding: 12px 12px 12px 16px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35); opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; will-change: transform, opacity;
 }
-  .t-item.reveal {
-  opacity: 1;
-  transform: translateY(0);
-}
-  .t-item:before{ content:""; position:absolute; left:-6px; top:18.5px; width:12px; height:12px; border-radius:50%; background:var(--primary); transform: translateZ(0);}
+.t-item.reveal { opacity: 1; transform: translateY(0); }
+.t-item:before{ content:""; position:absolute; left:-6px; top:18.5px; width:12px; height:12px; border-radius:50%; background:var(--primary); transform: translateZ(0);}
+
 footer{ margin:28px 0 8px; text-align:center; color:var(--muted); font-size:13px; }
-#confetti {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-  #musicIcon{ display:none; margin-left:12px; font-size:18px; animation:bounce 1s infinite alternate; }
+#confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+#musicIcon{ display:none; margin-left:12px; font-size:18px; animation:bounce 1s infinite alternate; }
 @keyframes bounce{ 0%{transform:translateY(0) translateZ(0);} 100%{transform:translateY(-4px) translateZ(0);} }
 @keyframes blink{ 0%,50%,100%{opacity:1;} 25%,75%{opacity:0;} }
 
-#musicIcon {
-display: none;
-margin-left: 7px;
-width: 20px;
-height: 20px;
-animation: bounce 1s infinite alternate;
-}
+#musicIcon { display: none; margin-left: 7px; width: 20px; height: 20px; animation: bounce 1s infinite alternate; }
+.badge .emoji { width: 18px; height: 18px; vertical-align: middle; margin-right: 2px; }
+.btn .emoji { width: 18px; height: 18px; vertical-align: middle; margin-left: 4px; }
+h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; }
+.subtitle .emoji { width: 18px; height: 18px; vertical-align: middle; margin-left: 0px; }
 
-.badge .emoji {
-width: 18px;
-height: 18px;
-vertical-align: middle;
-margin-right: 2px;
-}
+/* İSTATİSTİK */
+.stats-container-no-line { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+#stats-card .t-item { margin: 0; display: flex; align-items: center; font-size: 15px; }
+#stats-card .t-item::before { display: none !important; content: none; }
+.stat-highlight { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--primary-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-right: 10px; vertical-align: middle; line-height: 1; }
 
-.btn .emoji {
-width: 18px;
-height: 18px;
-vertical-align: middle;
-margin-left: 4px;
-}
-
-h3 .emoji {
-width: 30px;
-height: 30px;
-vertical-align: -3px;
-margin-right: 1px;
-}
-
-.subtitle .emoji {
-width: 18px;
-height: 18px;
-vertical-align: middle;
-margin-left: 0px;
-}
-
-/* İSTATİSTİK VE XP BAR STİLLERİ */
-.stats-container-no-line {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-#stats-card .t-item {
-    margin: 0; 
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-}
-#stats-card .t-item::before {
-    display: none !important;
-    content: none;
-}
-.stat-highlight {
-    font-size: 24px;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--primary), var(--primary-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-right: 10px;
-    vertical-align: middle;
-    line-height: 1;
-}
-
-/* XP Bar Stilleri */
-.xp-container {
-    margin-top: 20px;
-    padding: 0 8px;
-}
-.xp-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-.xp-badge {
-    background: rgba(155, 92, 255, 0.15);
-    color: var(--primary);
-    padding: 2px 8px;
-    border-radius: 6px;
-    border: 1px solid rgba(155, 92, 255, 0.2);
-    font-size: 11px;
-}
-.xp-bar-bg {
-    width: 100%;
-    height: 8px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-.xp-bar-fill {
-    height: 100%;
-    width: 0%; /* JS ile dolacak */
-    background: linear-gradient(90deg, var(--primary), var(--primary-2));
-    border-radius: 10px;
-    box-shadow: 0 0 15px var(--primary);
-    transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
+.xp-container { margin-top: 20px; padding: 0 8px; }
+.xp-header { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+.xp-badge { background: rgba(155, 92, 255, 0.15); color: var(--primary); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(155, 92, 255, 0.2); font-size: 11px; }
+.xp-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.05); }
+.xp-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-2)); border-radius: 10px; box-shadow: 0 0 15px var(--primary); transition: width 2s cubic-bezier(0.22, 1, 0.36, 1); }
 
 @media (min-width: 768px) {
-  .wrap {
-    max-width: 1200px;
-    padding: 24px 20px;
-  }
-  .desktop-layout {
-    display: grid;
-    gap: 20px;
-    margin-bottom: 20px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr auto auto;
-    grid-template-areas:
-      "header gallery"
-      "message gallery"
-      "timeline notes"
-      "stats stats";
-    align-items: start;
-  }
+  .wrap { max-width: 1200px; padding: 24px 20px; }
+  .desktop-layout { display: grid; gap: 20px; margin-bottom: 20px; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr auto auto; grid-template-areas: "header gallery" "message gallery" "timeline notes" "stats stats"; align-items: start; }
   #header-card { grid-area: header; }
-  #gallery-card {
-    grid-area: gallery;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    margin-top: 0;
-  }
+  #gallery-card { grid-area: gallery; display: flex; flex-direction: column; height: 100%; margin-top: 0; }
   .gallery-card h3 { margin-bottom: 15px; }
-  .gallery-card .grid {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    align-content: start;
-  }
-  #message-card {
-    grid-area: message;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: auto;
-    margin-top: 25px;
-  }
+  .gallery-card .grid { flex-grow: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; align-content: start; }
+  #message-card { grid-area: message; display: flex; flex-direction: column; justify-content: center; height: auto; margin-top: 25px; }
   #timeline-card { grid-area: timeline; display: flex; flex-direction: column; justify-content: space-between; margin-top: -56.7px; }
   #notes-card { grid-area: notes; display: flex; flex-direction: column; justify-content: space-between; }
   #stats-card { grid-area: stats; }
-  
-  .timeline-card .timeline,
-  .notes-card .timeline {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  /* Masaüstünde istatistikleri yan yana diz */
-  .stats-container-no-line {
-      flex-direction: row;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-  }
-  #stats-card .t-item {
-      justify-content: center;
-  }
-
-  .t-item {
-    position: relative;
-    margin: 8px 0;
-    padding: 10px 10px 10px 14px;
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 14px;
-    opacity: 0;
-    transform: translateY(20px) translateZ(0);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    will-change: transform, opacity;
-  }
+  .timeline-card .timeline, .notes-card .timeline { display: flex; flex-direction: column; justify-content: space-between; }
+  .stats-container-no-line { flex-direction: row; display: grid; grid-template-columns: repeat(3, 1fr); }
+  #stats-card .t-item { justify-content: center; }
+  .t-item { position: relative; margin: 8px 0; padding: 10px 10px 10px 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; opacity: 0; transform: translateY(20px) translateZ(0); transition: opacity 0.6s ease, transform 0.6s ease; will-change: transform, opacity; }
 }
 
-/* --- MODAL (POP-UP) STİLLERİ - DÜZELTİLMİŞ SÜRÜM --- */
+/* --- YENİ MODAL VE ZOOM STİLLERİ (Target+Reference Hibrit) --- */
+
+/* Modal Temel Yapısı */
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Başlangıç transparan */
+  z-index: 10000;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000; /* En üstte durması için yüksek değer */
+  align-items: center; justify-content: center;
   
-  /* STABİLİTE DÜZELTMESİ: Kapalıyken gizle ve tıklamayı engelle */
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
+  visibility: hidden;
   
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  transition: opacity 0.3s ease, background-color 0.3s ease, visibility 0.3s ease;
 }
 
 .modal.active {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Açılınca koyu */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* Modal İçerik Animasyonu (Instagram Tarzı) */
+/* Modal İçerik Kutusu - Transform burada uygulanacak */
 .modal-content {
   position: relative;
-  opacity: 0;
-  transform: scale(0.5); /* Başlangıçta küçük */
-  /* Yaylanma efekti (Spring Animation) */
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.4), opacity 0.3s ease;
   width: auto;
   max-width: 90vw;
-  pointer-events: none; 
+  
+  /* Başlangıç (Kapalı) Durumu */
+  transform: scale(0);
+  /* Referans kodundaki Yaylanma Efekti (Spring) */
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.modal.active .modal-content {
-  transform: scale(1); /* Tam boyut */
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Kapanırken düz ve hızlı gitsin */
-.modal:not(.active) .modal-content {
-  transition: transform 0.3s ease, opacity 0.2s ease;
-  transform: scale(0.8);
-}
-
+/* Modal içindeki Polaroid stili */
 .modal-content .polaroid {
   cursor: default;
   transform: rotate(0deg) !important;
   
-  /* Çerçevenin kendi rengi (Koyu/Belirgin) */
-  background: rgba(20, 20, 40, 0.6) !important; 
+  /* İSTEDİĞİN KOYU RENK (Anında değişmesi için !important) */
+  background: rgba(20, 20, 40, 0.75) !important;
   
-  /* --- İŞTE O GLOW EFEKTİ BURADA --- */
+  /* GLOW EFEKTİ */
   box-shadow: 
-    /* 1. Katman: Hafif Pembemsi Yakın Işıltı */
-    0 0 25px rgba(255, 122, 195, 0.3), 
-    
-    /* 2. Katman: Daha Geniş Morumsu Hale */
-    0 0 60px rgba(155, 92, 255, 0.2),
-    
-    /* 3. Katman: Derinlik Veren Siyah Gölge (Altta Kalır) */
-    0 40px 80px rgba(0, 0, 0, 0.8);
+    0 0 25px rgba(255, 122, 195, 0.5), 
+    0 0 60px rgba(155, 92, 255, 0.4),
+    0 40px 80px rgba(0, 0, 0, 0.8) !important;
 
-  /* Kenar çizgisine de hafif pembe kattım ki glow ile bütünleşsin */
   border: 0px solid rgba(255, 122, 195, 0.3);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  max-width: 80vw; width: auto; margin: 0; pointer-events: auto;
   
-  /* Diğer ayarlar */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  max-width: 80vw;
-  width: auto;
-  margin: 0;
-  pointer-events: auto;
-   touch-action: none; /* Tarayıcının sayfa kaydırmasını engeller, kontrol bizde */
-  transform-origin: center center; /* Zoom hep ortadan başlasın */
-  will-change: transform; /* Performans artışı */
-  
-  /* Zoom yaparken takılmaması için transition'ı JS ile yöneteceğiz */
-  transition: transform 0.1s linear; 
-}
 
-  .polaroid.spring-back {
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.4) !important;
-}
-
-@media (max-width: 768px) {
-  .modal-content .polaroid {
-    max-width: 85vw;
-  }
-}
 @media (min-width: 768px) {
-  #confetti {
-    display: none;
-  }
+  #confetti { display: none; }
+  .modal-content .polaroid { max-width: 60vh; }
 }
 .polaroid > * { position: relative; z-index:1; }
 .t-item > * { position: relative; z-index:1; }
-  </style>
+</style>
 </head>
 <body>
 
@@ -646,6 +390,7 @@ margin-left: 0px;
           </div>
           <div class="t-item">
             <strong class="stat-highlight" style="position: relative; top: -2px; font-size: 28px;">∞</strong> Ortak Anı
+            
           </div>
         </div>
         
@@ -667,7 +412,7 @@ margin-left: 0px;
 
   <div id="modal" class="modal">
     <div class="modal-content">
-    </div>
+      </div>
   </div>
 
 </body>
@@ -680,27 +425,19 @@ const lines = [
   "Canım ikizimm,",
   "Bugün senin günün ve bugün seni mutlu edebilmek için bu sayfayı senin için hazırladım.",
   "Seninle tanıştığım için o kadar mutluyum ki bunu anlatabilmem mümkün değil...",
-  "Beni sevdiğin için, beni anladığın için, bana destek çıktığın için, bana tekrardan hayatı sevdirdiğin için sana ne kadar teşekkür etsem az...",
+  "Beni sevdiğin için, beni anladığın için, bana destek olduğun için, bana tekrardan hayatı sevdirdiğin için sana ne kadar teşekkür etsem az...",
   "Umarım bu yılı daha önce hiç olmadığın kadar mutlu geçirirsin. Mutlu geçirmen için elimden geleni yapmaya çalışacağıma ve seni asla yalnız bırakmayacağıma söz veriyorumm.",
   "İyi ki doğduunnn!",
   "~Seni her şeyden çok seven İkizin"
 ];
-let i = 0,
-  j = 0;
-const speed = 30,
-  hold = 900;
+let i = 0, j = 0;
+const speed = 30, hold = 900;
 const el = $('#typewriter');
 const heart = document.createElement('img');
 heart.src = "https://iili.io/fcVF3kg.png";
-heart.style.width = '28px';
-heart.style.height = '28px';
-heart.style.marginRight = '4px';
-heart.style.verticalAlign = 'middle';
-heart.style.opacity = 0;
-heart.style.transition = 'opacity 0.3s ease';
+heart.style.width = '28px'; heart.style.height = '28px'; heart.style.marginRight = '4px'; heart.style.verticalAlign = 'middle'; heart.style.opacity = 0; heart.style.transition = 'opacity 0.3s ease';
 const caret = document.createElement('span');
-caret.className = 'caret';
-caret.innerHTML = '\u00A0';
+caret.className = 'caret'; caret.innerHTML = '\u00A0';
 el.appendChild(caret);
 
 function type() {
@@ -708,74 +445,39 @@ function type() {
     if (j <= lines[i].length) {
       el.innerHTML = lines[i].slice(0, j);
       el.appendChild(caret);
-      if (navigator.vibrate) navigator.vibrate(3);
+      if (navigator.vibrate) navigator.vibrate(2);
       if (i === lines.length - 1 && j === lines[i].length) {
         heart.style.opacity = 1;
         el.appendChild(heart);
         el.appendChild(caret);
       }
-      j++;
-      setTimeout(type, speed);
+      j++; setTimeout(type, speed);
     } else {
-      setTimeout(() => {
-        i++;
-        j = 0;
-        type();
-      }, hold);
+      setTimeout(() => { i++; j = 0; type(); }, hold);
     }
   }
 }
 
-// Müzik kontrolü ve geçiş efektleri
+// Müzik kontrolü
 const player = $('#player');
 player.src = "https://raw.githubusercontent.com/kazikate/Music/cedeabbb87c1a32f7c95bf4752997fab6d67d7b6/One%2BMore%2BLight%2B(Instrumental)%2B-%2BLinkin%2BPark.wav";
 
-// Müziği yumuşak bir şekilde başlatma fonksiyonu
 function fadeInMusic(targetVolume, duration = 0) {
-  player.play();
-  player.volume = 0;
-  const interval = 50;
-  const increment = targetVolume / (duration / interval);
+  player.play(); player.volume = 0;
+  const interval = 50; const increment = targetVolume / (duration / interval);
   let currentVolume = 0;
   const fade = setInterval(() => {
     currentVolume += increment;
-    if (currentVolume >= targetVolume) {
-      player.volume = targetVolume;
-      clearInterval(fade);
-    } else {
-      player.volume = currentVolume;
-    }
+    if (currentVolume >= targetVolume) { player.volume = targetVolume; clearInterval(fade); } else { player.volume = currentVolume; }
   }, interval);
 }
 
-// Müziği yumuşak bir şekilde durdurma fonksiyonu
-function fadeOutMusic(duration = 1000) {
-  const startVolume = player.volume;
-  const interval = 50;
-  const decrement = startVolume / (duration / interval);
-  const fade = setInterval(() => {
-    if (player.volume > 0) {
-      player.volume -= decrement;
-    } else {
-      player.pause();
-      player.currentTime = 0;
-      clearInterval(fade);
-    }
-  }, interval);
-}
-
-// "Mesajı Göster" butonuna tıklama olayı
 $('#revealMsg').addEventListener('click', () => {
-  el.innerHTML = '';
-  i = 0;
-  j = 0;
-  el.appendChild(caret);
-  type();
+  el.innerHTML = ''; i = 0; j = 0;
+  el.appendChild(caret); type();
   $('#musicIcon').style.display = 'inline-block';
   const btn = $('#revealMsg');
-  btn.classList.remove('press');
-  void btn.offsetWidth;
-  btn.classList.add('press');
+  btn.classList.remove('press'); void btn.offsetWidth; btn.classList.add('press');
   fadeInMusic(1);
 });
 
@@ -783,69 +485,42 @@ $('#revealMsg').addEventListener('click', () => {
 const canvas = document.getElementById('confetti');
 const ctx = canvas.getContext('2d');
 let W, H;
-
 function resizeCanvas() {
   const wrap = document.querySelector(".wrap");
   W = canvas.width = wrap.offsetWidth;
   H = canvas.height = wrap.offsetHeight;
 }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
 let confs = [];
-const img = new Image();
-img.src = "https://iili.io/fcG0wNf.png";
+const img = new Image(); img.src = "https://iili.io/fcG0wNf.png";
 
 function spawn(n = 100) {
   for (let i = 0; i < n; i++) {
     confs.push({
-      x: Math.random() * W,
-      y: -20 - Math.random() * H,
-      size: 20 + Math.random() * 20,
-      vy: 2 + Math.random() * 3,
-      vx: Math.random() * 2 - 1,
-      rot: Math.random() * Math.PI * 2,
-      dRot: (Math.random() * 0.04) + 0.01
+      x: Math.random() * W, y: -20 - Math.random() * H,
+      size: 20 + Math.random() * 20, vy: 2 + Math.random() * 3, vx: Math.random() * 2 - 1, rot: Math.random() * Math.PI * 2, dRot: (Math.random() * 0.04) + 0.01
     });
   }
 }
-
 function draw() {
   ctx.clearRect(0, 0, W, H);
   confs.forEach(p => {
-    p.y += p.vy;
-    p.x += p.vx;
-    p.rot += p.dRot;
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    ctx.globalAlpha = 1;
-    ctx.drawImage(img, -p.size / 2, -p.size / 2, p.size, p.size);
-    ctx.restore();
+    p.y += p.vy; p.x += p.vx; p.rot += p.dRot;
+    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.globalAlpha = 1;
+    ctx.drawImage(img, -p.size / 2, -p.size / 2, p.size, p.size); ctx.restore();
   });
   confs = confs.filter(p => p.y < H + 50);
   if (confs.length > 0) requestAnimationFrame(draw);
 }
-spawn(100);
-draw();
+spawn(100); draw();
 
 // Scroll efektleri
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('reveal');
-    } else {
-      entry.target.classList.remove('reveal');
-    }
-  });
-}, {
-  threshold: 0.1
-});
+  entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal'); } else { entry.target.classList.remove('reveal'); } });
+}, { threshold: 0.1 });
 document.querySelectorAll('.card, .polaroid, .t-item').forEach(el => observer.observe(el));
 document.addEventListener('DOMContentLoaded', () => {
-    const headerCard = document.getElementById('header-card');
-    headerCard.classList.add('reveal');
-    
-    // --- GÜN SAYACI HESAPLAMA ---
+    const headerCard = document.getElementById('header-card'); headerCard.classList.add('reveal');
     const daysCounter = document.getElementById('daysCounter');
     const startDate = new Date(2025, 1, 23, 14, 8); 
     const today = new Date();
@@ -853,126 +528,169 @@ document.addEventListener('DOMContentLoaded', () => {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
     if(daysCounter) { daysCounter.innerText = diffDays; }
 
-    // --- XP BAR ANİMASYONU ---
     const xpBar = document.querySelector('.xp-bar-fill');
     const statsCard = document.querySelector('#stats-card');
-
     const xpObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && xpBar) {
-          xpBar.style.width = '100%';
-          xpObserver.unobserve(entry.target);
-        }
-      });
+      entries.forEach(entry => { if (entry.isIntersecting && xpBar) { xpBar.style.width = '100%'; xpObserver.unobserve(entry.target); } });
     }, { threshold: 0.5 }); 
-
     if (statsCard) xpObserver.observe(statsCard);
 });
 
-// --- FOTOĞRAF BÜYÜTME & PINCH ZOOM EFEKTİ ---
-const galleryGrid = $('#gallery');
-const modal = $('#modal');
-const modalContent = $('.modal-content');
+// ------------------------------------------------------------------
+// GELİŞMİŞ PINCH ZOOM & MODAL MANTIĞI (Reference Kodundan Uyarlandı)
+// ------------------------------------------------------------------
 
-// Değişkenler (Zoom hesabı için)
+const galleryGrid = document.getElementById('gallery');
+const modal = document.getElementById('modal');
+const modalContent = document.querySelector('.modal-content');
+
+// Sabitler
+const SPRING_TRANSITION = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+const MODAL_STATE_NAME = 'photo_zoom_open';
+
+// Değişkenler
 let initialDistance = 0;
 let currentScale = 1;
 let isPinching = false;
-let startScale = 1;
+const MIN_TOUCHES_FOR_PINCH = 2;
 
-galleryGrid.addEventListener('click', (e) => {
-  const polaroid = e.target.closest('.polaroid');
-  
-  if (polaroid && !modal.classList.contains('active')) {
-    const rect = polaroid.getBoundingClientRect();
-    // Dokunmatik veya mouse koordinatı
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX) || (rect.left + rect.width / 2);
-    const clientY = e.clientY || (e.touches && e.touches[0].clientY) || (rect.top + rect.height / 2);
+// 1. Modalı Açma
+function openModal(polaroidNode) {
+    if (modal.classList.contains('active')) return;
 
-    modalContent.style.transformOrigin = `${clientX}px ${clientY}px`;
+    // Geçmişe ekle (Geri tuşu için)
+    if (!history.state || history.state.modal !== MODAL_STATE_NAME) {
+        history.pushState({ modal: MODAL_STATE_NAME }, '', window.location.href);
+    }
 
-    const clonedPolaroid = polaroid.cloneNode(true);
+    // Scroll'u kilitle
+    document.body.classList.add('no-scroll');
+
+    // İçeriği Kopyala
     modalContent.innerHTML = '';
-    modalContent.appendChild(clonedPolaroid);
-    
-    // Pinch olaylarını yeni eklenen karta bağla
-    addPinchZoom(clonedPolaroid);
+    const cloned = polaroidNode.cloneNode(true);
+    modalContent.appendChild(cloned);
 
+    // Animasyon Başlangıcı
+    modalContent.style.transition = SPRING_TRANSITION;
+    modalContent.style.transform = 'scale(0)';
+
+    // Göster
     modal.classList.add('active');
-    history.pushState({ modal: 'open' }, 'Büyütülmüş Fotoğraf');
-  }
-});
+    
+    // Hafif gecikmeyle büyüt (Pop efekti)
+    setTimeout(() => {
+        modalContent.style.transform = 'scale(1)';
+    }, 10);
 
-// --- PINCH ZOOM FONKSİYONU ---
-function addPinchZoom(element) {
-  element.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 2) {
-      isPinching = true;
-      // İki parmak arası başlangıç mesafesi
-      initialDistance = Math.hypot(
-        e.touches[0].pageX - e.touches[1].pageX,
-        e.touches[0].pageY - e.touches[1].pageY
-      );
-      // Animasyonu kapat (Anlık tepki için)
-      element.classList.remove('spring-back');
-      element.style.transition = 'none';
-      startScale = currentScale;
-    }
-  });
-
-  element.addEventListener('touchmove', (e) => {
-    if (isPinching && e.touches.length === 2) {
-      e.preventDefault(); // Sayfanın kaymasını engelle
-
-      const dist = Math.hypot(
-        e.touches[0].pageX - e.touches[1].pageX,
-        e.touches[0].pageY - e.touches[1].pageY
-      );
-
-      // Yeni ölçeği hesapla
-      // (Mesafe arttıkça scale artar)
-      const scaleChange = dist / initialDistance;
-      currentScale = Math.max(1, startScale * scaleChange); // 1'den küçülmesin
-
-      // Fotoğrafı büyüt
-      element.style.transform = `scale(${currentScale})`;
-    }
-  });
-
-  element.addEventListener('touchend', (e) => {
-    if (isPinching && e.touches.length < 2) {
-      isPinching = false;
-      
-      // Yaylanarak geri dön (Spring Effect)
-      element.style.transition = ''; // Inline stili temizle
-      element.classList.add('spring-back');
-      
-      // Sıfırla
-      currentScale = 1;
-      element.style.transform = `scale(1)`;
-    }
-  });
+    // Escape tuşu dinleyicisi
+    document.addEventListener('keydown', handleEscape, { once: true });
 }
 
-// Modalı Kapatma
-modal.addEventListener('click', (e) => {
-  // Zoom yaparken kapanmasın
-  if (isPinching) return;
+// 2. Modalı Kapatma
+function closeModal() {
+    if (!modal.classList.contains('active')) return;
 
-  if (e.target.id === 'modal' || e.target.closest('.modal-content')) {
     modal.classList.remove('active');
-    // Kapanınca içindeki scale değerini temizleyelim ki bir sonrakinde sorun olmasın
-    setTimeout(() => {
-        modalContent.innerHTML = '';
-        currentScale = 1;
-    }, 400);
-  }
+    document.removeEventListener('keydown', handleEscape);
+    document.body.classList.remove('no-scroll');
+
+    // Kapanış animasyonu
+    modalContent.style.transition = SPRING_TRANSITION;
+    modalContent.style.transform = 'scale(0)';
+    
+    // Değişkenleri sıfırla
+    currentScale = 1;
+    isPinching = false;
+
+    // Geçmişten çık (Eğer modal durumu ise)
+    if (history.state && history.state.modal === MODAL_STATE_NAME) {
+        if (history.length > 0) {
+            history.back();
+        }
+    }
+}
+
+// 3. Galeriden Tıklama
+galleryGrid.addEventListener('click', (e) => {
+    const polaroid = e.target.closest('.polaroid');
+    if (polaroid) {
+        openModal(polaroid);
+    }
 });
 
+// 4. Modal Dışına Tıklayınca Kapatma
+modal.addEventListener('click', (e) => {
+    // İçeriğe (fotoğrafa) tıklanmadıysa kapat
+    if (e.target.id === 'modal') {
+        closeModal();
+    }
+});
+
+// 5. Geri Tuşu Kontrolü
 window.addEventListener('popstate', (e) => {
-  if (modal.classList.contains('active')) {
-    modal.classList.remove('active');
-  }
+    if (modal.classList.contains('active') && (!e.state || e.state.modal !== MODAL_STATE_NAME)) {
+        // UI kapat (History zaten değiştiği için back() çağırmıyoruz)
+        modal.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        modalContent.style.transition = SPRING_TRANSITION;
+        modalContent.style.transform = 'scale(0)';
+    }
+});
+
+function handleEscape(e) {
+    if (e.key === 'Escape') closeModal();
+}
+
+// 6. PINCH ZOOM MATEMATİĞİ
+
+// Mesafe Hesaplama
+function getDistance(touches) {
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    return Math.sqrt(
+        Math.pow(touch2.clientX - touch1.clientX, 2) +
+        Math.pow(touch2.clientY - touch1.clientY, 2)
+    );
+}
+
+// A. Başlangıç (Touchstart)
+modal.addEventListener('touchstart', (e) => {
+    if (e.touches.length === MIN_TOUCHES_FOR_PINCH) {
+        e.preventDefault(); // Sayfa zoomunu engelle
+        modalContent.style.transition = 'none'; // Anlık tepki için animasyonu kapat
+        initialDistance = getDistance(e.touches);
+        isPinching = true;
+    } else {
+        isPinching = false;
+    }
+}, { passive: false });
+
+// B. Hareket (Touchmove)
+modal.addEventListener('touchmove', (e) => {
+    if (!isPinching) return;
+    
+    e.preventDefault();
+
+    const newDistance = getDistance(e.touches);
+    const scaleFactor = newDistance / initialDistance;
+    
+    // Min ve Max sınırları
+    currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
+    
+    modalContent.style.transform = `scale(${currentScale})`;
+}, { passive: false });
+
+// C. Bitiş (Touchend)
+modal.addEventListener('touchend', (e) => {
+    if (!isPinching) return;
+    
+    isPinching = false;
+    
+    // Yaylanarak geri dön (Spring Effect)
+    modalContent.style.transition = SPRING_TRANSITION;
+    modalContent.style.transform = 'scale(1)';
+    currentScale = 1;
 });
 
 </script>
