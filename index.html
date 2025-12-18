@@ -32,7 +32,7 @@
   --glow: 0 0 40px rgba(155,92,255,.35), 0 0 80px rgba(53,209,255,.25);
   --radius: 22px;
 }
-*{box-sizing:border-box;}
+* {box-sizing:border-box;}
 html, body {
   margin:0;
   padding:0;
@@ -175,7 +175,20 @@ section.card{ margin-top:20px; }
 .timeline{position:relative; padding-left:22px}
 .timeline:before{ content:""; position:absolute; left:10px; top:4px; bottom:4px; width:2px; background:linear-gradient(var(--primary), transparent); transform: translateZ(0);}
 .t-item {
-  position: relative; z-index: 2; margin: 16px 0; padding: 12px 12px 12px 16px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35); opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; will-change: transform, opacity;
+  position: relative;
+  z-index: 2;
+  margin: 16px 0;
+  padding: 12px 12px 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255,255,255, 0.08);
+  border-radius: var(--radius);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: transform, opacity;
 }
 .t-item.reveal { opacity: 1; transform: translateY(0); }
 .t-item:before{ content:""; position:absolute; left:-6px; top:18.5px; width:12px; height:12px; border-radius:50%; background:var(--primary); transform: translateZ(0);}
@@ -199,7 +212,7 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
 .stat-highlight { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--primary-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-right: 10px; vertical-align: middle; line-height: 1; }
 
 .xp-container { margin-top: 20px; padding: 0 8px; }
-.xp-header { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+.xp-header { display: flex; justify-content: space-between; font-size: 13px; color:var(--muted); margin-bottom: 8px; font-weight: 600; }
 .xp-badge { background: rgba(155, 92, 255, 0.15); color: var(--primary); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(155, 92, 255, 0.2); font-size: 11px; }
 .xp-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.05); }
 .xp-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-2)); border-radius: 10px; box-shadow: 0 0 15px var(--primary); transition: width 2s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -221,21 +234,18 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
   .t-item { position: relative; margin: 8px 0; padding: 10px 10px 10px 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; opacity: 0; transform: translateY(20px) translateZ(0); transition: opacity 0.6s ease, transform 0.6s ease; will-change: transform, opacity; }
 }
 
-/* --- YENİ MODAL VE ZOOM STİLLERİ (Target+Reference Hibrit) --- */
-/* istatistik*/
-/* Modal Temel Yapısı */
+/* --- YENİ MODAL VE ZOOM STİLLERİ --- */
+
 .modal {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0); /* Başlangıç transparan */
+  background-color: rgba(0, 0, 0, 0);
   z-index: 10000;
   display: flex;
   align-items: center; justify-content: center;
-  
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
-  
   transition: opacity 0.3s ease, background-color 0.3s ease, visibility 0.3s ease;
 }
 
@@ -243,41 +253,31 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  background-color: rgba(0, 0, 0, 0.4); /* Açılınca koyu */
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* Modal İçerik Kutusu - Transform burada uygulanacak */
 .modal-content {
   position: relative;
   width: auto;
   max-width: 90vw;
-  
-  /* Başlangıç (Kapalı) Durumu */
   transform: scale(0);
-  /* Referans kodundaki Yaylanma Efekti (Spring) */
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Modal içindeki Polaroid stili */
 .modal-content .polaroid {
   cursor: default;
   transform: rotate(0deg) !important;
-  
-  /* İSTEDİĞİN KOYU RENK (Anında değişmesi için !important) */
   background: rgba(20, 20, 40, 0.75) !important;
-  
-  /* GLOW EFEKTİ */
   box-shadow: 
     0 0 25px rgba(255, 122, 195, 0.5), 
     0 0 60px rgba(155, 92, 255, 0.4),
     0 40px 80px rgba(0, 0, 0, 0.8) !important;
-
   border: 0px solid rgba(255, 122, 195, 0.3);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   max-width: 80vw; width: auto; margin: 0; pointer-events: auto;
-  
+}
 
 @media (min-width: 768px) {
   #confetti { display: none; }
@@ -285,6 +285,240 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
 }
 .polaroid > * { position: relative; z-index:1; }
 .t-item > * { position: relative; z-index:1; }
+
+/* --- EASTER EGG FOCUS EFEKTİ --- */
+#focus-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  border-radius: var(--radius);
+}
+
+#focus-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Blur'u başlık dahil diğer tüm içeriğe uygula */
+#stats-card.blur-active h3,
+#stats-card.blur-active .stats-container-no-line > .t-item:not(#infinite-card),
+#stats-card.blur-active .xp-container {
+  filter: blur(14px);
+  transition: filter 0.4s ease;
+}
+
+#infinite-card {
+  position: relative;
+  z-index: 20;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.4s ease, 
+              background 0.4s ease;
+  cursor: pointer;
+}
+
+#infinite-card.focused {
+  transform: scale(1.1);
+  background: rgba(30, 30, 45, 0.95);
+  box-shadow: 0 0 40px rgba(155, 92, 255, 0.7), 
+              0 0 80px rgba(255, 122, 195, 0.5);
+}
+
+/* Yanıp sönen pembe nokta */
+.pink-dot {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #ff7ac3;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff7ac3, 0 0 20px var(--primary);
+  animation: blink-dot 2s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes blink-dot {
+  0%, 100% { opacity: 0.3; transform: translateY(-50%) scale(1); }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+}
+
+#infinite-card.focused .pink-dot {
+  animation: blink-dot 1.2s infinite ease-in-out;
+}
+
+/* Easter Egg mesajları */
+.easter-msg {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent);
+  font-family: 'Pacifico', cursive;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  text-shadow: 0 0 15px var(--accent);
+}
+
+#easter-msg1 {
+  font-size: 28px; 
+  top: -58px;
+}
+
+#easter-msg2 {
+  font-size: 16px; 
+  top: 54px;
+}
+
+.easter-msg.visible {
+  opacity: 1;
+}
+
+/* 7 tıklama sonrası tam karanlık overlay */
+#full-blackout {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+#full-blackout.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Emin misin? ve butonlar */
+#emin-text {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  color: var(--accent);
+  text-shadow: 0 0 20px var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  z-index: 100000;
+}
+
+#emin-text.visible {
+  opacity: 1;
+}
+
+#buttons-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 20px;
+  opacity: 0;
+  pointer-events: none; /* EKLEMEN GEREKEN BU: Görünmezken tıklanmasın */
+  transition: opacity 0.6s ease;
+  z-index: 100000;
+}
+
+#buttons-container.visible {
+  opacity: 1;
+  pointer-events: auto; /* EKLEMEN GEREKEN BU: Görününce tıklansın */
+}
+
+
+#evet-btn, #hayir-btn {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255,255,255, 0.08);
+  border-radius: var(--radius);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#evet-btn:hover, #hayir-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Peki... yazısı */
+#peki-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  color: var(--accent);
+  text-shadow: 0 0 30px var(--accent);
+  opacity: 0;
+  z-index: 100001;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+#peki-text.visible {
+  opacity: 1;
+}
+
+/* Fade out için */
+.fade-out {
+  opacity: 0 !important;
+  transition: opacity 1s ease !important;
+}
+
+  /* --- VİDEO KONTEYNERİ --- */
+#video-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.9); /* Arkaplan hafif kararır */
+  display: flex;
+  align-items: center; justify-content: center;
+  z-index: 100005; /* Her şeyin üstünde */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease; /* Tak diye gelmesi için süreyi kısabilirsin */
+}
+
+#video-container.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#surprise-video {
+  width: auto;  /* Genişliği zorlama, videonun kendi genişliği olsun */
+  height: auto; /* Yüksekliği zorlama */
+  
+  max-width: 90%; /* Ama ekranın %90'ından da geniş olmasın (mobilde taşmasın) */
+  max-height: 80vh; /* Ekranın %80'inden de uzun olmasın (alt-üst taşmasın) */
+  
+  display: block; /* Hizalama sorunlarını çözer */
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(155, 92, 255, 0.6); /* Mor glow efekti */
+  background: black; /* Video yüklenene kadar arka plan */
+  outline: none;
+}
+
+
 </style>
 </head>
 <body>
@@ -381,6 +615,9 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
           <img class="emoji" src="https://iili.io/fcUNz2j.png" alt="İstatistik" />
           <span class="fancy">İkizlik Raporu</span>
         </h3>
+
+        <div id="focus-overlay"></div>
+
         <div class="stats-container-no-line">
           <div class="t-item">
             <strong class="stat-highlight"><span id="daysCounter">0</span></strong> Gündür Tanışıyoruz
@@ -388,9 +625,13 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
           <div class="t-item">
             <strong class="stat-highlight">%100</strong> Ruh İkizliği
           </div>
-          <div class="t-item">
+          <div class="t-item" id="infinite-card">
             <strong class="stat-highlight" style="position: relative; top: -2px; font-size: 28px;">∞</strong> Ortak Anı
+            <div class="pink-dot"></div>
             
+            <!-- Yeni: Gizli mesajlar -->
+            <div id="easter-msg1" class="easter-msg">Demek burayı buldun...</div>
+            <div id="easter-msg2" class="easter-msg">Tıklamaya devam ett</div>
           </div>
         </div>
         
@@ -415,12 +656,36 @@ h3 .emoji { width: 30px; height: 30px; vertical-align: -3px; margin-right: 1px; 
       </div>
   </div>
 
+  <!-- Tam karanlık overlay -->
+  <div id="full-blackout"></div>
+
+  <!-- Emin misin? ve butonlar -->
+  <div id="emin-text">Emin misin?</div>
+  <div id="buttons-container">
+    <button id="evet-btn">Evet</button>
+    <button id="hayir-btn">Hayır</button>
+  </div>
+
+  <!-- Peki... -->
+  <div id="peki-text">Peki...</div>
+
+      <div id="video-container">
+    <video id="surprise-video" controls>
+      <source src="https://raw.githubusercontent.com/kazikate/Music/734c1d50b224edeb47fbe15527102a545d14c335/VID_20251218_012048_729.mp4" type="video/mp4">
+      Tarayıcın videoyu desteklemiyor.
+    </video>
+  </div>
+
 </body>
   </html>
 <script>
 const $ = sel => document.querySelector(sel);
 
-// Typewriter
+// ------------------------------------------------------------------
+// 1. TEMEL EFEKTLER (Yazı, Müzik, Konfeti, Scroll)
+// ------------------------------------------------------------------
+
+// Typewriter (Yazı Efekti)
 const lines = [
   "Canım ikizimm,",
   "Bugün senin günün ve bugün seni mutlu edebilmek için bu sayfayı senin için hazırladım.",
@@ -458,7 +723,7 @@ function type() {
   }
 }
 
-// Müzik kontrolü
+// Müzik Kontrolü
 const player = $('#player');
 player.src = "https://raw.githubusercontent.com/kazikate/Music/cedeabbb87c1a32f7c95bf4752997fab6d67d7b6/One%2BMore%2BLight%2B(Instrumental)%2B-%2BLinkin%2BPark.wav";
 
@@ -481,7 +746,7 @@ $('#revealMsg').addEventListener('click', () => {
   fadeInMusic(1);
 });
 
-// PNG konfeti
+// PNG Konfeti
 const canvas = document.getElementById('confetti');
 const ctx = canvas.getContext('2d');
 let W, H;
@@ -514,11 +779,12 @@ function draw() {
 }
 spawn(100); draw();
 
-// Scroll efektleri
+// Scroll & Reveal Efektleri
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal'); } else { entry.target.classList.remove('reveal'); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.card, .polaroid, .t-item').forEach(el => observer.observe(el));
+
 document.addEventListener('DOMContentLoaded', () => {
     const headerCard = document.getElementById('header-card'); headerCard.classList.add('reveal');
     const daysCounter = document.getElementById('daysCounter');
@@ -532,78 +798,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const statsCard = document.querySelector('#stats-card');
     const xpObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting && xpBar) { xpBar.style.width = '100%'; xpObserver.unobserve(entry.target); } });
-    }, { threshold: 0.8 }); 
+    }, { threshold: 0.5 }); 
     if (statsCard) xpObserver.observe(statsCard);
 });
 
 // ------------------------------------------------------------------
-// GELİŞMİŞ PINCH ZOOM & MODAL MANTIĞI (Reference Kodundan Uyarlandı)
+// 2. GALERİ MODAL & ZOOM MANTIĞI
 // ------------------------------------------------------------------
 
 const galleryGrid = document.getElementById('gallery');
 const modal = document.getElementById('modal');
 const modalContent = document.querySelector('.modal-content');
 
-// Sabitler
 const SPRING_TRANSITION = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 const MODAL_STATE_NAME = 'photo_zoom_open';
 
-// Değişkenler
 let initialDistance = 0;
 let currentScale = 1;
 let isPinching = false;
 const MIN_TOUCHES_FOR_PINCH = 2;
 
-// 1. Modalı Açma
 function openModal(polaroidNode) {
     if (modal.classList.contains('active')) return;
 
-    // Geçmişe ekle (Geri tuşu için)
     if (!history.state || history.state.modal !== MODAL_STATE_NAME) {
         history.pushState({ modal: MODAL_STATE_NAME }, '', window.location.href);
     }
-
-    // Scroll'u kilitle
     document.body.classList.add('no-scroll');
-
-    // İçeriği Kopyala
     modalContent.innerHTML = '';
     const cloned = polaroidNode.cloneNode(true);
     modalContent.appendChild(cloned);
-
-    // Animasyon Başlangıcı
     modalContent.style.transition = SPRING_TRANSITION;
     modalContent.style.transform = 'scale(0)';
-
-    // Göster
     modal.classList.add('active');
-    
-    // Hafif gecikmeyle büyüt (Pop efekti)
     setTimeout(() => {
         modalContent.style.transform = 'scale(1)';
     }, 10);
-
-    // Escape tuşu dinleyicisi
     document.addEventListener('keydown', handleEscape, { once: true });
 }
 
-// 2. Modalı Kapatma
 function closeModal() {
     if (!modal.classList.contains('active')) return;
-
     modal.classList.remove('active');
     document.removeEventListener('keydown', handleEscape);
     document.body.classList.remove('no-scroll');
-
-    // Kapanış animasyonu
     modalContent.style.transition = SPRING_TRANSITION;
     modalContent.style.transform = 'scale(0)';
-    
-    // Değişkenleri sıfırla
     currentScale = 1;
     isPinching = false;
-
-    // Geçmişten çık (Eğer modal durumu ise)
     if (history.state && history.state.modal === MODAL_STATE_NAME) {
         if (history.length > 0) {
             history.back();
@@ -611,7 +853,6 @@ function closeModal() {
     }
 }
 
-// 3. Galeriden Tıklama
 galleryGrid.addEventListener('click', (e) => {
     const polaroid = e.target.closest('.polaroid');
     if (polaroid) {
@@ -619,22 +860,9 @@ galleryGrid.addEventListener('click', (e) => {
     }
 });
 
-// 4. Modal Dışına Tıklayınca Kapatma
 modal.addEventListener('click', (e) => {
-    // İçeriğe (fotoğrafa) tıklanmadıysa kapat
     if (e.target.id === 'modal') {
         closeModal();
-    }
-});
-
-// 5. Geri Tuşu Kontrolü
-window.addEventListener('popstate', (e) => {
-    if (modal.classList.contains('active') && (!e.state || e.state.modal !== MODAL_STATE_NAME)) {
-        // UI kapat (History zaten değiştiği için back() çağırmıyoruz)
-        modal.classList.remove('active');
-        document.body.classList.remove('no-scroll');
-        modalContent.style.transition = SPRING_TRANSITION;
-        modalContent.style.transform = 'scale(0)';
     }
 });
 
@@ -642,9 +870,35 @@ function handleEscape(e) {
     if (e.key === 'Escape') closeModal();
 }
 
-// 6. PINCH ZOOM MATEMATİĞİ
+// Pinch Zoom (Mobilde Çimdikleme)
+modal.addEventListener('touchstart', (e) => {
+    if (e.touches.length === MIN_TOUCHES_FOR_PINCH) {
+        e.preventDefault(); 
+        modalContent.style.transition = 'none'; 
+        initialDistance = getDistance(e.touches);
+        isPinching = true;
+    } else {
+        isPinching = false;
+    }
+}, { passive: false });
 
-// Mesafe Hesaplama
+modal.addEventListener('touchmove', (e) => {
+    if (!isPinching) return;
+    e.preventDefault();
+    const newDistance = getDistance(e.touches);
+    const scaleFactor = newDistance / initialDistance;
+    currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
+    modalContent.style.transform = `scale(${currentScale})`;
+}, { passive: false });
+
+modal.addEventListener('touchend', (e) => {
+    if (!isPinching) return;
+    isPinching = false;
+    modalContent.style.transition = SPRING_TRANSITION;
+    modalContent.style.transform = 'scale(1)';
+    currentScale = 1;
+});
+
 function getDistance(touches) {
     const touch1 = touches[0];
     const touch2 = touches[1];
@@ -654,43 +908,193 @@ function getDistance(touches) {
     );
 }
 
-// A. Başlangıç (Touchstart)
-modal.addEventListener('touchstart', (e) => {
-    if (e.touches.length === MIN_TOUCHES_FOR_PINCH) {
-        e.preventDefault(); // Sayfa zoomunu engelle
-        modalContent.style.transition = 'none'; // Anlık tepki için animasyonu kapat
-        initialDistance = getDistance(e.touches);
-        isPinching = true;
-    } else {
-        isPinching = false;
-    }
-}, { passive: false });
+// ------------------------------------------------------------------
+// 3. EASTER EGG (SÜRPRİZ YUMURTA) & VİDEO
+// ------------------------------------------------------------------
 
-// B. Hareket (Touchmove)
-modal.addEventListener('touchmove', (e) => {
-    if (!isPinching) return;
-    
-    e.preventDefault();
+const infiniteCard = document.getElementById('infinite-card');
+const focusOverlay = document.getElementById('focus-overlay');
+const statsCard = document.getElementById('stats-card');
+const msg1 = document.getElementById('easter-msg1');
+const msg2 = document.getElementById('easter-msg2');
+const blackout = document.getElementById('full-blackout');
+const eminText = document.getElementById('emin-text');
+const buttonsContainer = document.getElementById('buttons-container');
+const pekiText = document.getElementById('peki-text');
+const evetBtn = document.getElementById('evet-btn');
+const hayirBtn = document.getElementById('hayir-btn');
 
-    const newDistance = getDistance(e.touches);
-    const scaleFactor = newDistance / initialDistance;
-    
-    // Min ve Max sınırları
-    currentScale = Math.min(Math.max(scaleFactor, 0.5), 4.0);
-    
-    modalContent.style.transform = `scale(${currentScale})`;
-}, { passive: false });
+// Video Elementleri
+const videoContainer = document.getElementById('video-container');
+const videoPlayer = document.getElementById('surprise-video');
+const bgMusic = document.getElementById('player');
 
-// C. Bitiş (Touchend)
-modal.addEventListener('touchend', (e) => {
-    if (!isPinching) return;
-    
-    isPinching = false;
-    
-    // Yaylanarak geri dön (Spring Effect)
-    modalContent.style.transition = SPRING_TRANSITION;
-    modalContent.style.transform = 'scale(1)';
-    currentScale = 1;
+let clickCount = 0;
+
+function clearClasses(element) {
+  if(element) element.classList.remove('visible', 'fade-out', 'active');
+}
+
+// Tamamen kapat ve sayfayı İLK haline döndür
+function closeAllEasterEgg() {
+  infiniteCard.classList.remove('focused');
+  focusOverlay.classList.remove('active');
+  statsCard.classList.remove('blur-active');
+  blackout.classList.remove('active');
+  
+  if(videoContainer) videoContainer.classList.remove('active');
+  if(videoPlayer) {
+      videoPlayer.pause();
+      videoPlayer.currentTime = 0;
+  }
+  
+  clearClasses(eminText);
+  clearClasses(buttonsContainer);
+  clearClasses(pekiText);
+  clearClasses(msg1);
+  clearClasses(msg2);
+
+  clickCount = 0;
+  
+  if (history.state && history.state.easterStage !== 'normal') {
+     history.replaceState({ easterStage: 'normal' }, '');
+  }
+}
+
+// Spotlight Aç
+function openSpotlight() {
+  infiniteCard.classList.add('focused');
+  focusOverlay.classList.add('active');
+  statsCard.classList.add('blur-active');
+  
+  if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
+  clickCount = 1;
+
+  setTimeout(() => msg1.classList.add('visible'), 300);
+  setTimeout(() => msg2.classList.add('visible'), 1300);
+
+  history.pushState({ easterStage: 'spotlight' }, '');
+}
+
+// Karanlık Modu Aç
+function openBlackout() {
+  blackout.classList.add('active');
+  if (navigator.vibrate) navigator.vibrate([100, 100, 100, 100, 200]);
+  history.pushState({ easterStage: 'blackout' }, '');
+
+  clearClasses(eminText);
+  clearClasses(buttonsContainer);
+
+  setTimeout(() => {
+    eminText.classList.add('visible');
+    buttonsContainer.classList.add('visible');
+  }, 500);
+}
+
+// Kart Tıklama
+infiniteCard.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (blackout.classList.contains('active')) return;
+
+  if (!infiniteCard.classList.contains('focused')) {
+    openSpotlight();
+    return;
+  }
+
+  clickCount++;
+  if (navigator.vibrate) navigator.vibrate(40);
+
+  if (clickCount >= 7) {
+    openBlackout();
+  }
 });
 
-</script>
+// Overlay Tıklama (Sadece Easter Egg için)
+focusOverlay.addEventListener('click', () => {
+  if (!blackout.classList.contains('active')) {
+    closeAllEasterEgg();
+  }
+});
+
+// EVET BUTONU
+if(evetBtn) {
+    evetBtn.addEventListener('click', () => {
+      eminText.classList.add('fade-out');
+      buttonsContainer.classList.add('fade-out');
+
+      setTimeout(() => {
+        pekiText.classList.remove('fade-out'); 
+        pekiText.classList.add('visible');
+      }, 1000);
+
+      setTimeout(() => {
+        pekiText.classList.add('fade-out');
+        
+        // Video Başlat
+        videoContainer.classList.add('active');
+        bgMusic.pause();
+        videoPlayer.play().catch(e => console.log("Otomatik oynatma engellendi:", e));
+        
+      }, 3000); 
+    });
+}
+
+// HAYIR BUTONU
+if(hayirBtn) {
+    hayirBtn.addEventListener('click', () => {
+      eminText.classList.add('fade-out');
+      buttonsContainer.classList.add('fade-out');
+      msg1.classList.remove('visible');
+      msg2.classList.remove('visible');
+      setTimeout(() => { closeAllEasterEgg(); }, 600);
+    });
+}
+
+// Video Bitince
+if(videoPlayer) {
+    videoPlayer.addEventListener('ended', () => {
+      closeAllEasterEgg();
+      bgMusic.volume = 0.5; 
+      bgMusic.play();
+    });
+}
+
+// Geri Tuşu Yönetimi (Ortak)
+window.addEventListener('popstate', (e) => {
+  const state = e.state || {};
+  
+  // 1. Galeri Modu Açıksa
+  if (modal.classList.contains('active') && state.modal !== MODAL_STATE_NAME) {
+      modal.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+      modalContent.style.transition = SPRING_TRANSITION;
+      modalContent.style.transform = 'scale(0)';
+      return;
+  }
+
+  // 2. Easter Egg Açıksa
+  const easterStage = state.easterStage || 'normal';
+  if (easterStage === 'normal') {
+     // Eğer blackout veya spotlight aktifse kapat
+     if (blackout.classList.contains('active') || infiniteCard.classList.contains('focused')) {
+         closeAllEasterEgg();
+     }
+  } else if (easterStage === 'spotlight') {
+     // Blackout'tan spotlight'a dönüş
+     blackout.classList.remove('active');
+     clearClasses(eminText);
+     clearClasses(buttonsContainer);
+     if(videoContainer) videoContainer.classList.remove('active');
+     if(videoPlayer) videoPlayer.pause();
+  }
+});
+
+// Sayfa Yüklenince History Reset
+window.addEventListener('load', () => {
+  history.replaceState({ easterStage: 'normal', modal: null }, '');
+});
+
+
+
+
+    </script>
