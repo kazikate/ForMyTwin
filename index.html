@@ -737,7 +737,12 @@ function fadeInMusic(targetVolume, duration = 0) {
   }, interval);
 }
 
+// --- DEĞİŞECEK KISIM (Müzik kontrolünün olduğu yer) ---
+
+let musicStarted = false; // YENİ: Başlangıçta müzik kapalı
+
 $('#revealMsg').addEventListener('click', () => {
+  musicStarted = true; // YENİ: Butona basılınca "Müzik açıldı" diye not alıyoruz
   el.innerHTML = ''; i = 0; j = 0;
   el.appendChild(caret); type();
   $('#musicIcon').style.display = 'inline-block';
@@ -745,6 +750,7 @@ $('#revealMsg').addEventListener('click', () => {
   btn.classList.remove('press'); void btn.offsetWidth; btn.classList.add('press');
   fadeInMusic(1);
 });
+
 
 // PNG Konfeti
 const canvas = document.getElementById('confetti');
@@ -1051,13 +1057,21 @@ if(hayirBtn) {
 }
 
 // Video Bitince
+// --- DEĞİŞECEK KISIM (En alttaki video bitiş kodu) ---
+
+// Video Bitince
 if(videoPlayer) {
     videoPlayer.addEventListener('ended', () => {
       closeAllEasterEgg();
-      bgMusic.volume = 0.5; 
-      bgMusic.play();
+      
+      // YENİ: Sadece eğer kullanıcı daha önce müziği açtıysa devam ettir
+      if (musicStarted) {
+          bgMusic.volume = 0.5; 
+          bgMusic.play();
+      }
     });
 }
+
 
 // Geri Tuşu Yönetimi (Ortak)
 window.addEventListener('popstate', (e) => {
@@ -1097,4 +1111,4 @@ window.addEventListener('load', () => {
 
 
 
-    </script>
+</script>
