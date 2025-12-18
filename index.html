@@ -532,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const statsCard = document.querySelector('#stats-card');
     const xpObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting && xpBar) { xpBar.style.width = '100%'; xpObserver.unobserve(entry.target); } });
-    }, { threshold: 0.5 }); 
+    }, { threshold: 0.8 }); 
     if (statsCard) xpObserver.observe(statsCard);
 });
 
